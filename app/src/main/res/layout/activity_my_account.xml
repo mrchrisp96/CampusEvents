@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/lightblue"
+    tools:context=".MyAccount">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true"
+            android:adjustViewBounds="true"
+            app:srcCompat="@drawable/airplane" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="360dp"
+        android:layout_height="550dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView11">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="51dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="Name:"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/accountName"
+                android:layout_width="360dp"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:textSize="18sp"
+                android:textColor="@android:color/black"
+                android:layout_weight="1"
+                android:text="" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="51dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView14"
+                android:gravity="center_vertical"
+                android:textColor="@android:color/black"
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
+                android:textSize="18sp"
+                android:layout_weight="1"
+                android:text="Email:" />
+
+            <TextView
+                android:id="@+id/accountEmail"
+                android:layout_width="360dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text=""
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="51dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView16"
+                android:gravity="center_vertical"
+                android:textColor="@android:color/black"
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
+                android:textSize="18sp"
+                android:layout_weight="1"
+                android:text="College:" />
+
+            <TextView
+                android:id="@+id/accountCollege"
+                android:layout_width="360dp"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:textSize="18sp"
+                android:textColor="@android:color/black"
+                android:layout_weight="1"
+                android:text="" />
+        </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="90dp" />
+
+        <Button
+            android:id="@+id/button2"
+            android:background="@drawable/btn_rounded"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:text="Sign out" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="cursive"
+        android:text="My Account"
+        android:textColor="@android:color/black"
+        android:textSize="48sp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

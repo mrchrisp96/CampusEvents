@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "203941841561",
+    "firebase_url": "https://campusevents-a5465.firebaseio.com",
+    "project_id": "campusevents-a5465",
+    "storage_bucket": "campusevents-a5465.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:203941841561:android:b973d793b96ec73f52c608",
+        "android_client_info": {
+          "package_name": "com.example.campusevents"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "203941841561-s0tkvhkh9g4vttbtsklcjfi7mdrjp5r1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.campusevents",
+            "certificate_hash": "34ac8a4615b9e0067bc152744c628281cfc1456e"
+          }
+        },
+        {
+          "client_id": "203941841561-r24ehqtmk2occiikq2rd5rv6f68fshil.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJTfhRCUmi0InQhDO72SWEP8ZkNu1KimE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "203941841561-r24ehqtmk2occiikq2rd5rv6f68fshil.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
