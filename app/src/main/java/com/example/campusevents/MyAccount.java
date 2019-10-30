@@ -15,7 +15,7 @@ import org.w3c.dom.Text;
 public class MyAccount extends AppCompatActivity {
 
     TextView name, college, email;
-    Button signout;
+    Button signout, editEvent, editClub;
 
 
     @Override
@@ -37,6 +37,28 @@ public class MyAccount extends AppCompatActivity {
             public void onClick(View v) {
                 FirebaseAuth.getInstance().signOut();
                 Intent intent = new Intent(MyAccount.this, login.class);
+                startActivity(intent);
+            }
+        });
+
+        editEvent = (Button) findViewById(R.id.editEvents);
+        editEvent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+                Intent intent = new Intent(MyAccount.this, MyEvents.class);
+                intent.putExtra("Event", "Edit Event");
+                startActivity(intent);
+            }
+        });
+
+        editClub = (Button) findViewById(R.id.editClubs);
+        editClub.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+                Intent intent = new Intent(MyAccount.this, MyEvents.class);
+                intent.putExtra("Club", "Edit Club");
                 startActivity(intent);
             }
         });

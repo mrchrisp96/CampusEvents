@@ -9,8 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Preview"></activity>
-        <activity android:name=".DateEvent"></activity>
+        <activity android:name=".MyEvents"></activity>
+        <activity android:name=".EditEvents" />
+        <activity android:name=".Preview" />
+        <activity android:name=".DateEvent" />
         <activity android:name=".Event" />
         <activity android:name=".CreateEvent2" />
         <activity android:name=".CreateEvent" />

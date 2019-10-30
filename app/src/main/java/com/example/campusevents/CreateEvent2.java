@@ -5,6 +5,7 @@ import androidx.appcompat.widget.AppCompatEditText;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.text.Editable;
@@ -19,14 +20,14 @@ import android.widget.EditText;
 import android.widget.Scroller;
 import android.widget.TextView;
 
+import com.google.android.material.chip.ChipDrawable;
 import com.pchmn.materialchips.model.ChipInterface;
 
 public class CreateEvent2 extends AppCompatActivity {
 
     EditText description, tags;
     TextView characters, changeTag;
-    int numTags = 0, numChars = 0;
-    boolean backspaceClicked;
+    int numTags = 0, numChars = 0, previousLength;
     private int SpannedLength = 0, chipLength = 4;
 
     @Override
@@ -44,31 +45,33 @@ public class CreateEvent2 extends AppCompatActivity {
         description.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                if (after < count) {
-                    backspaceClicked = true;
-                } else {
-                    backspaceClicked = false;
-                }
+                previousLength = s.length();
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                numChars++;
-                characters.setText(numChars + "/1000");
-                if(numChars == 1000) {
-                    description.setEnabled(false);
-                }
+
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                if(backspaceClicked) {
-                    numChars--;
-                    characters.setText(numChars + "/1000");
+                boolean backspaceClicked = previousLength > s.length();
+                if(!backspaceClicked && numChars == 1000) {
+                    characters.setTextColor(Color.RED);
+                } else {
+                    characters.setTextColor(Color.BLACK);
+                    if (backspaceClicked) {
+                        numChars--;
+                        System.out.println(numChars);
+                    } else {
+                        numChars++;
+                    }
                 }
+                characters.setText(numChars + "/1000");
             }
         });
 
+        final ChipDrawable chip = ChipDrawable.createFromResource(this, R.xml.chip);
         tags = (EditText) findViewById(R.id.tags);
         tags.addTextChangedListener(new TextWatcher() {
             @Override
@@ -77,12 +80,20 @@ public class CreateEvent2 extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+                if (s.length() == SpannedLength - chipLength) {
+                    SpannedLength = s.length();
+                }
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-
+                if (s.length()>0 && s.subSequence(s.length()-1, s.length()).toString().equalsIgnoreCase("\n")) {
+                    chip.setText(s.subSequence(SpannedLength,s.length()));
+                    chip.setBounds(0, 0, chip.getIntrinsicWidth(), chip.getIntrinsicHeight());
+                    ImageSpan span = new ImageSpan(chip);
+                    s.setSpan(span, SpannedLength, s.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    SpannedLength = s.length();
+                }
             }
         });
 

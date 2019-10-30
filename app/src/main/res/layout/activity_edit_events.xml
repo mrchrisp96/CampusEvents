@@ -5,16 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/lightblue"
-    tools:context=".Event">
+    tools:context=".EditEvents">
 
-    <TextView
-        android:id="@+id/textView28"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="cursive"
-        android:textColor="@android:color/black"
-        android:textSize="48sp"
-        android:text="Title"
-        tools:layout_editor_absoluteX="174dp"
-        tools:layout_editor_absoluteY="106dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
