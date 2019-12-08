@@ -1,5 +1,6 @@
 package com.example.campusevents.ui.dashboard;
 
+import android.util.TypedValue;
 import android.widget.TextView;
 
 import androidx.lifecycle.LiveData;
@@ -9,7 +10,6 @@ import androidx.lifecycle.ViewModel;
 public class DashboardViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
-    TextView welcome;
 
     public DashboardViewModel() {
         mText = new MutableLiveData<>();

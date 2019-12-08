@@ -1,11 +1,15 @@
 package com.example.campusevents.ui.home;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -34,6 +38,7 @@ public class HomeFragment extends Fragment {
                 textView.setText(s);
             }
         });
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24f);
 
         account = (Button) root.findViewById(R.id.button3);
         account.setOnClickListener(new View.OnClickListener() {
@@ -44,7 +49,13 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(450, ActionBar.LayoutParams.WRAP_CONTENT);
+        params.gravity = Gravity.CENTER;
+        account.setLayoutParams(params);
+        account.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20f);
+
         todaysEvents = (RecyclerView) root.findViewById(R.id.todaysEvents);
+        todaysEvents.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 650));
 
         return root;
     }

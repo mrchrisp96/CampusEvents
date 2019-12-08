@@ -1,6 +1,7 @@
 package com.example.campusevents.ui.dashboard;
 
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +31,8 @@ public class DashboardFragment extends Fragment {
                 textView.setText(s);
             }
         });
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24f);
+
         return root;
     }
 }

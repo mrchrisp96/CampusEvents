@@ -1,11 +1,15 @@
 package com.example.campusevents.ui.notifications;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -38,6 +42,7 @@ public class NotificationsFragment extends Fragment {
                 textView.setText(s);
             }
         });
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24f);
 
         addEvent = (Button) root.findViewById(R.id.addEvent);
         addEvent.setOnClickListener(new View.OnClickListener() {
@@ -48,6 +53,13 @@ public class NotificationsFragment extends Fragment {
             }
         });
 
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(400, ActionBar.LayoutParams.WRAP_CONTENT);
+        params.gravity = Gravity.CENTER;
+        addEvent.setLayoutParams(params);
+        addEvent.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20f);
+
+        myEvents = (RecyclerView) root.findViewById(R.id.myEvents);
+        myEvents.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 650));
         return root;
     }
 }

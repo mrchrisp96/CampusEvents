@@ -2,10 +2,15 @@ package com.example.campusevents;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -62,5 +67,14 @@ public class MyAccount extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+//        editClub.setLayoutParams(new RelativeLayout.LayoutParams(440, ViewGroup.LayoutParams.WRAP_CONTENT));
+        editClub.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20f);
+//
+//        editEvent.setLayoutParams(new RelativeLayout.LayoutParams(400, ViewGroup.LayoutParams.WRAP_CONTENT));
+        editEvent.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20f);
+
+        signout.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.WRAP_CONTENT));
+        signout.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20f);
     }
 }

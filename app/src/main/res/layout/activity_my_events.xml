@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="cursive"
-        android:text="TITLE"
+        android:text="My Events"
         android:textColor="@android:color/black"
         android:textSize="48sp"
         app:layout_constraintBottom_toTopOf="@+id/textView27"

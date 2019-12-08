@@ -12,13 +12,17 @@
         android:layout_height="match_parent"
         android:gravity="center_horizontal"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="5dp"
+        tools:layout_editor_absoluteX="2dp"
         tools:layout_editor_absoluteY="4dp">
 
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="17dp" />
+
         <TextView
-            android:id="@+id/textView2"
-            android:layout_width="339dp"
-            android:layout_height="141dp"
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:fontFamily="cursive"
             android:gravity="center"
             android:text="MyCampus Events"
@@ -27,19 +31,27 @@
             tools:layout_editor_absoluteX="56dp"
             tools:layout_editor_absoluteY="60dp" />
 
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="17dp" />
+
         <TextView
-            android:id="@+id/textView"
-            android:layout_width="340dp"
-            android:layout_height="151dp"
+            android:id="@+id/textView2"
+            android:layout_width="340sp"
+            android:layout_height="wrap_content"
             android:fontFamily="cursive"
             android:gravity="center"
             android:text="Find a club or event on your campus today!"
             android:textSize="32sp" />
 
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="17dp" />
+
         <LinearLayout
             android:id="@+id/linearLayout"
             android:layout_width="312dp"
-            android:layout_height="152dp"
+            android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:orientation="vertical"
             tools:layout_editor_absoluteX="49dp"
@@ -76,11 +88,15 @@
                 android:text="Sign In"
                 android:textSize="24sp" />
 
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="8dp" />
+
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/linearLayout2"
-            android:layout_width="212dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             tools:layout_editor_absoluteX="99dp"
@@ -106,18 +122,24 @@
 
         </LinearLayout>
 
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="8dp" />
+
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
+
             <ImageView
                 android:id="@+id/imageView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentBottom="true"
                 android:adjustViewBounds="true"
-                app:srcCompat="@drawable/hotairballoon"/>
+                app:srcCompat="@drawable/hotairballoon" />
+
         </RelativeLayout>
 
     </LinearLayout>
