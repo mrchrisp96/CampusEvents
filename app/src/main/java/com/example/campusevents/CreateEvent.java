@@ -8,6 +8,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -26,9 +29,13 @@ import android.widget.Toast;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.core.view.DataEvent;
 
+import java.sql.Time;
 import java.util.Calendar;
+import java.util.Date;
 
 import static android.R.layout.simple_spinner_item;
+
+/* Class written by Christopher Park */
 
 public class CreateEvent extends AppCompatActivity {
 
@@ -61,6 +68,7 @@ public class CreateEvent extends AppCompatActivity {
         phone = (EditText) findViewById(R.id.textview20);
 
         next = (Button) findViewById(R.id.button4);
+        next.setTextSize(TypedValue.COMPLEX_UNIT_SP, 23f);
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,8 +78,8 @@ public class CreateEvent extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Please enter a name for your club/event.", Toast.LENGTH_SHORT).show();
                 } else if (location.getText().toString().isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Please enter a location for your club/event.", Toast.LENGTH_SHORT).show();
-                } else if (phone.getText().toString().isEmpty()) {
-                    Toast.makeText(getApplicationContext(), "Please enter a phone number for others to reach you.", Toast.LENGTH_SHORT).show();
+                } else if (phone.getText().toString().isEmpty() || phone.length() != 10) {
+                    Toast.makeText(getApplicationContext(), "Please enter a valid phone number for others to reach you.", Toast.LENGTH_SHORT).show();
                 } else if (timeOfEvent.getText().toString().isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Please enter a time for your club/event.", Toast.LENGTH_SHORT).show();
                 } else {
@@ -80,9 +88,11 @@ public class CreateEvent extends AppCompatActivity {
                     NewEvent.newEvent.phone = location.getText().toString();
                     if(NewEvent.newEvent.whichOne.equals("Club")) {
                         Intent intent = new Intent(CreateEvent.this, CreateEvent2.class);
+                        intent.putExtra("Phone", phone.getText().toString());
                         startActivity(intent);
                     } else if(NewEvent.newEvent.whichOne.equals("Event")) {
                         Intent intent = new Intent(CreateEvent.this, DateEvent.class);
+                        intent.putExtra("Phone", phone.getText().toString());
                         startActivity(intent);
                     }
                 }
@@ -105,13 +115,32 @@ public class CreateEvent extends AppCompatActivity {
                         if(hourOfDay < 12) {
                             newHour = hourOfDay;
                             AM_PM = "AM";
+                            if(newHour == 0) {
+                                newHour = 12;
+                            }
                         } else {
                             newHour = hourOfDay - 12;
                             AM_PM = "PM";
+                            if(newHour == 0) {
+                                newHour = 12;
+                            }
                         }
-                        NewEvent.newEvent.time = hourOfDay + ":" + minute;
-                        System.out.println(NewEvent.newEvent.time);
-                        timeOfEvent.setText(newHour + ":" + minute + AM_PM);
+//                        NewEvent.newEvent.time = hourOfDay + ":" + minute;
+                        Calendar cal = Calendar.getInstance();
+                        cal.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                        cal.set(Calendar.MINUTE, minute);
+                        cal.set(Calendar.SECOND, 0);
+                        Date date = cal.getTime();
+                        System.out.println(date);
+                        NewEvent.newEvent.date = date;
+                        if(minute < 10) {
+                            String tempMin = "0" + minute;
+                            timeOfEvent.setText(newHour + ":" + tempMin + AM_PM);
+                            NewEvent.newEvent.time = newHour + ":" + tempMin + AM_PM;
+                        } else {
+                            timeOfEvent.setText(newHour + ":" + minute + AM_PM);
+                            NewEvent.newEvent.time = newHour + ":" + minute + AM_PM;
+                        }
                     }
                 }, hour, minute, false);
 

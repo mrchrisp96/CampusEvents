@@ -36,6 +36,8 @@ import java.util.Objects;
 
 import static android.R.layout.simple_spinner_item;
 
+/* Class written by Christopher Park */
+
 public class SignUp extends AppCompatActivity {
 
     Button create;

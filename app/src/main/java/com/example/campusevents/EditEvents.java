@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+/* Class written by Christopher Park */
+
 public class EditEvents extends AppCompatActivity {
 
     @Override

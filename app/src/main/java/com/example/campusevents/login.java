@@ -33,6 +33,7 @@ import org.w3c.dom.Text;
 
 import java.util.Objects;
 
+/* Class written by Christopher Park */
 
 public class login extends AppCompatActivity {
 

@@ -10,6 +10,8 @@ import android.widget.TextView;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+/* Class written by Christopher Park */
+
 public class MyEvents extends AppCompatActivity {
 
     String club = "", event = "";

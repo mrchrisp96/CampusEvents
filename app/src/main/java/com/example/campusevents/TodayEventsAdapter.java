@@ -11,6 +11,8 @@ import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
+/* Class written by Christopher Park */
+
 public class TodayEventsAdapter extends RecyclerView.Adapter<TodayEventsAdapter.TodayEventsHolder> {
 
     private ArrayList<Events> events;

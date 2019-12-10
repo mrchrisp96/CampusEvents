@@ -17,6 +17,8 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import org.w3c.dom.Text;
 
+/* Class written by Christopher Park */
+
 public class MyAccount extends AppCompatActivity {
 
     TextView name, college, email;

@@ -19,6 +19,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+/* Class written by Christopher Park */
+
 public class DateEvent extends AppCompatActivity {
 
     Date todaysDate, selectedDate;

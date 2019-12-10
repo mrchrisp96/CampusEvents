@@ -49,7 +49,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(450, ActionBar.LayoutParams.WRAP_CONTENT);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(550, ActionBar.LayoutParams.WRAP_CONTENT);
         params.gravity = Gravity.CENTER;
         account.setLayoutParams(params);
         account.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20f);
