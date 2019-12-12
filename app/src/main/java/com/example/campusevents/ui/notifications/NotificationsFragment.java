@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -54,10 +55,8 @@ public class NotificationsFragment extends Fragment {
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference reference = database.getReference();
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        notificationsViewModel =
-                ViewModelProviders.of(this).get(NotificationsViewModel.class);
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        notificationsViewModel = ViewModelProviders.of(this).get(NotificationsViewModel.class);
         View root = inflater.inflate(R.layout.fragment_myevents, container, false);
         final TextView textView = root.findViewById(R.id.text_notifications);
         notificationsViewModel.getText().observe(this, new Observer<String>() {
@@ -70,6 +69,8 @@ public class NotificationsFragment extends Fragment {
 
         events = Student.currentStudent.myEvents;
         populateMyEvents();
+
+        myEvents = (RecyclerView) root.findViewById(R.id.myEvents);
 
         layoutManager = new LinearLayoutManager(root.getContext());
         myEvents.setHasFixedSize(true);
@@ -99,13 +100,10 @@ public class NotificationsFragment extends Fragment {
             }
         });
 
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(500, ActionBar.LayoutParams.WRAP_CONTENT);
-        params.gravity = Gravity.CENTER;
-        addEvent.setLayoutParams(params);
         addEvent.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20f);
 
-        myEvents = (RecyclerView) root.findViewById(R.id.myEvents);
-        myEvents.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 650));
+        RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, 600);
+        myEvents.setLayoutParams(lp);
         return root;
     }
 
@@ -114,10 +112,10 @@ public class NotificationsFragment extends Fragment {
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for(DataSnapshot data: dataSnapshot.getChildren()) {
-                    if(data.getKey().equals("Attending Clubs")) {
+                for (DataSnapshot data : dataSnapshot.getChildren()) {
+                    if (data.getKey().equals("Attending Clubs")) {
                         data = data.child("Attending Clubs");
-                        for(DataSnapshot dataSnapshot1: data.getChildren()) {
+                        for (DataSnapshot dataSnapshot1 : data.getChildren()) {
                             Events event = new Events();
 
                             event.name = dataSnapshot1.getKey();
@@ -139,5 +137,12 @@ public class NotificationsFragment extends Fragment {
 
             }
         });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        populateMyEvents();
+        myEvents.getAdapter().notifyDataSetChanged();
     }
 }

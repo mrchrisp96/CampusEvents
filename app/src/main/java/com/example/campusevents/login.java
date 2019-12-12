@@ -92,6 +92,7 @@ public class login extends AppCompatActivity {
 
                                     String[] splitEmail = Objects.requireNonNull(GlobalFirebase.user.getEmail()).split("@");
                                     Student.currentStudent.username = splitEmail[0].toLowerCase();
+                                    Student.currentStudent.uid = auth.getUid();
                                     retrieveStudentInfo(Student.currentStudent.username);
                                 } else {
                                     Toast.makeText(login.this, "Please verify your email first!", Toast.LENGTH_SHORT).show();

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class Student {
 
-    public String username, name, college, email;
+    public String username, name, college, email, uid;
     public ArrayList<Events> myEvents = new ArrayList<>(); // stores the events by the students
     public ArrayList<String> interests = new ArrayList<>(); // lists of interests by student
 
@@ -19,5 +19,6 @@ public class Student {
         this.college = college;
         this.myEvents = myEvents;
         this.interests = interests;
+        this.uid = uid;
     }
 }

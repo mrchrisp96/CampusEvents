@@ -6,10 +6,9 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="100dp"
-    app:cardCornerRadius="4dp"
-    app:cardElevation="5dp"
-    app:cardUseCompatPadding="true"
-    app:cardPreventCornerOverlap="false">
+    app:cardBackgroundColor="@android:color/transparent"
+    app:cardPreventCornerOverlap="false"
+    >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/relativeLayout"
@@ -18,31 +17,32 @@
         android:layout_margin="4dp">
 
         <TextView
-            android:id="@+id/rowName"
-            android:layout_width="263dp"
-            android:layout_height="34dp"
+            android:id="@+id/attendeeName"
+            android:layout_width="260dp"
+            android:layout_height="48dp"
             android:gravity="center_vertical"
             android:textColor="@color/common_google_signin_btn_text_dark_focused"
             android:textSize="24sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/rowTime"
+            app:layout_constraintBottom_toTopOf="@+id/attendeeInfo"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.124"
+            app:layout_constraintHorizontal_bias="0.05"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/rowTime"
-            android:layout_width="265dp"
-            android:layout_height="35dp"
+            android:id="@+id/attendeeInfo"
+            android:layout_width="260dp"
+            android:layout_height="33dp"
             android:gravity="center_vertical"
             android:text=""
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.125"
+            app:layout_constraintHorizontal_bias="0.05"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rowName" />
+            app:layout_constraintTop_toBottomOf="@+id/attendeeName" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

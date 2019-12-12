@@ -46,6 +46,8 @@ public class MyEventsAdapter extends RecyclerView.Adapter<MyEventsAdapter.MyEven
             eventName.setText(event.name);
             time.setText(event.time);
             date.setText(event.date);
+
+            holder.bind(event, listener);
         }
     }
 
@@ -64,7 +66,6 @@ public class MyEventsAdapter extends RecyclerView.Adapter<MyEventsAdapter.MyEven
             super(itemView);
             eventName = itemView.findViewById(R.id.rowName);
             time = itemView.findViewById(R.id.rowTime);
-            date = itemView.findViewById(R.id.rowDate);
         }
 
         public void bind(final Events event, final OnItemClickListener listener) {

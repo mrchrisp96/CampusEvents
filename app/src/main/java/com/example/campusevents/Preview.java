@@ -2,6 +2,7 @@ package com.example.campusevents;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.app.ActionBar;
 import android.content.Intent;
@@ -18,6 +19,8 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.campusevents.ui.home.HomeFragment;
+import com.example.campusevents.ui.notifications.NotificationsFragment;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -94,26 +97,31 @@ public class Preview extends AppCompatActivity {
         publish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                reference = reference.child(Student.currentStudent.college).child("Clubs").child(NewEvent.newEvent.name);
+                reference = reference.child("College").child(Student.currentStudent.college).child("Clubs").child(NewEvent.newEvent.name);
                 reference.child("Host").setValue(Student.currentStudent.name);
                 reference.child("Email").setValue(Student.currentStudent.email);
-                reference.child("Phone").setValue(textPhone);
+                reference.child("Phone").setValue(phone);
                 reference.child("Location").setValue(NewEvent.newEvent.location);
                 reference.child("Time").setValue(NewEvent.newEvent.time);
                 reference.child("Description").setValue(NewEvent.newEvent.description);
 
-                reference = database.getReference().child("Students").child(Student.currentStudent.name)
+                reference = database.getReference().child("Students").child(Student.currentStudent.username)
                         .child("My Clubs").child(NewEvent.newEvent.name);
 
                 reference.child("Host").setValue(Student.currentStudent.name);
                 reference.child("Email").setValue(Student.currentStudent.email);
-                reference.child("Phone").setValue(textPhone);
+                reference.child("Phone").setValue(phone);
                 reference.child("Location").setValue(NewEvent.newEvent.location);
                 reference.child("Time").setValue(NewEvent.newEvent.time);
                 reference.child("Description").setValue(NewEvent.newEvent.description);
 
-                Intent intent = new Intent(Preview.this, MainActivity.class);
-                startActivityForResult(intent, TOAST_CODE);
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                transaction.add(R.id.container, new HomeFragment());
+                transaction.addToBackStack(null);
+                transaction.commit();
+
+//                Intent intent = new Intent(Preview.this, MainActivity.class);
+//                startActivityForResult(intent, TOAST_CODE);
             }
         });
 //        ConstraintLayout.LayoutParams params = new ConstraintLayout.LayoutParams(450, ActionBar.LayoutParams.WRAP_CONTENT);
