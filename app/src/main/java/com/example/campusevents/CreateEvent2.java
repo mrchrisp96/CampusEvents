@@ -39,7 +39,7 @@ public class CreateEvent2 extends AppCompatActivity {
     EditText description, tags;
     TextView characters, changeTag, belowMsg;
     int numTags = 0, numChars = 0, previousLength;
-    private int SpannedLength = 0, chipLength = 4;
+//    private int SpannedLength = 0, chipLength = 4;
     Button preview;
 
     @Override
@@ -96,31 +96,30 @@ public class CreateEvent2 extends AppCompatActivity {
 //            }
 //        });
 
-        final ChipDrawable chip = ChipDrawable.createFromResource(this, R.xml.chip);
-        tags = (EditText) findViewById(R.id.tags);
-        tags.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s.length() == SpannedLength - chipLength) {
-                    SpannedLength = s.length();
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                if (s.length() > 0 && s.subSequence(s.length()-1, s.length()).toString().equalsIgnoreCase("\n")) {
-                    chip.setText(s.subSequence(SpannedLength,s.length()));
-                    chip.setBounds(0, 0, chip.getIntrinsicWidth(), chip.getIntrinsicHeight());
-                    ImageSpan span = new ImageSpan(chip);
-                    s.setSpan(span, SpannedLength, s.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                    SpannedLength = s.length();
-                }
-            }
-        });
+        //tags = (EditText) findViewById(R.id.tags);
+//        tags.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//                if (s.length() == SpannedLength - chipLength) {
+//                    SpannedLength = s.length();
+//                }
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//                if (s.length() > 0 && s.subSequence(s.length()-1, s.length()).toString().equalsIgnoreCase("\n")) {
+//                    chip.setText(s.subSequence(SpannedLength,s.length()));
+//                    chip.setBounds(0, 0, chip.getIntrinsicWidth(), chip.getIntrinsicHeight());
+//                    ImageSpan span = new ImageSpan(chip);
+//                    s.setSpan(span, SpannedLength, s.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+//                    SpannedLength = s.length();
+//                }
+//            }
+//        });
 
         description.setScroller(new Scroller(getApplicationContext()));
         description.setVerticalScrollBarEnabled(true);
@@ -171,29 +170,28 @@ public class CreateEvent2 extends AppCompatActivity {
         });
     }
 
-    public TextView createContactTextView(String text){
-        TextView tv = new TextView(this);
-        tv.setText(text);
-        tv.setTextSize(20);
-        tv.setBackgroundResource(R.drawable.purplebtn_rounded);
-        tv.setCompoundDrawablesWithIntrinsicBounds(0, 0,android.R.drawable.presence_offline, 0);
-        return tv;
-    }
-
-    public static Object convertViewToDrawable(View view) {
-        int spec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
-        view.measure(spec, spec);
-        view.layout(0, 0, view.getMeasuredWidth(), view.getMeasuredHeight());
-        Bitmap b = Bitmap.createBitmap(view.getMeasuredWidth(), view.getMeasuredHeight(),
-                Bitmap.Config.ARGB_8888);
-        Canvas c = new Canvas(b);
-        c.translate(-view.getScrollX(), -view.getScrollY());
-        view.draw(c);
-        view.setDrawingCacheEnabled(true);
-        Bitmap cacheBmp = view.getDrawingCache();
-        Bitmap viewBmp = cacheBmp.copy(Bitmap.Config.ARGB_8888, true);
-        view.destroyDrawingCache();
-        return new BitmapDrawable(viewBmp);
-
-    }
+//    public TextView createContactTextView(String text){
+//        TextView tv = new TextView(this);
+//        tv.setText(text);
+//        tv.setTextSize(20);
+//        tv.setBackgroundResource(R.drawable.purplebtn_rounded);
+//        tv.setCompoundDrawablesWithIntrinsicBounds(0, 0,android.R.drawable.presence_offline, 0);
+//        return tv;
+//    }
+//
+//    public static Object convertViewToDrawable(View view) {
+//        int spec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+//        view.measure(spec, spec);
+//        view.layout(0, 0, view.getMeasuredWidth(), view.getMeasuredHeight());
+//        Bitmap b = Bitmap.createBitmap(view.getMeasuredWidth(), view.getMeasuredHeight(),
+//                Bitmap.Config.ARGB_8888);
+//        Canvas c = new Canvas(b);
+//        c.translate(-view.getScrollX(), -view.getScrollY());
+//        view.draw(c);
+//        view.setDrawingCacheEnabled(true);
+//        Bitmap cacheBmp = view.getDrawingCache();
+//        Bitmap viewBmp = cacheBmp.copy(Bitmap.Config.ARGB_8888, true);
+//        view.destroyDrawingCache();
+//        return new BitmapDrawable(viewBmp);
+//    }
 }

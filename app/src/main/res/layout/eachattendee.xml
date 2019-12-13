@@ -2,11 +2,12 @@
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="100dp"
-    app:cardBackgroundColor="@android:color/transparent"
+    android:layout_height="80dp"
+    app:cardCornerRadius="4dp"
+    app:cardElevation="5dp"
+    app:cardUseCompatPadding="true"
     app:cardPreventCornerOverlap="false"
     >
 
@@ -19,7 +20,7 @@
         <TextView
             android:id="@+id/attendeeName"
             android:layout_width="260dp"
-            android:layout_height="48dp"
+            android:layout_height="30dp"
             android:gravity="center_vertical"
             android:textColor="@color/common_google_signin_btn_text_dark_focused"
             android:textSize="24sp"
@@ -33,7 +34,7 @@
         <TextView
             android:id="@+id/attendeeInfo"
             android:layout_width="260dp"
-            android:layout_height="33dp"
+            android:layout_height="20dp"
             android:gravity="center_vertical"
             android:text=""
             android:textSize="12sp"

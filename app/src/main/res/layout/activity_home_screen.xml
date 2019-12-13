@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/lightblue">
+    android:background="@color/lightblue"
+    tools:context=".HomeScreen">
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -20,70 +21,57 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginStart="-2dp"
             android:layout_marginBottom="56dp"
             android:adjustViewBounds="true"
-            app:srcCompat="@drawable/hotairballoon" />
+            app:srcCompat="@drawable/airplane" />
+
     </RelativeLayout>
 
     <Button
-        android:id="@+id/addEvent"
-        android:layout_width="160dp"
+        android:id="@+id/button3"
+        android:layout_width="190dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
         android:background="@drawable/btn_rounded"
         android:gravity="center"
-        android:text="new event"
+        android:text="My account"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/nav_view"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayout4" />
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout3" />
 
     <RelativeLayout
-        android:id="@+id/relativeLayout4"
+        android:id="@+id/relativeLayout3"
         android:layout_width="365dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/addEvent"
+        app:layout_constraintBottom_toTopOf="@+id/button3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_notifications">
+        app:layout_constraintTop_toBottomOf="@+id/text_home">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/myEvents"
+            android:id="@+id/todaysEvents"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="350dp" />
 
     </RelativeLayout>
 
     <TextView
-        android:id="@+id/text_notifications"
+        android:id="@+id/text_home"
         android:layout_width="400dp"
-        android:layout_height="120dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_height="wrap_content"
         android:fontFamily="cursive"
         android:textAlignment="center"
         android:textColor="@android:color/black"
-        android:textSize="26sp"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/relativeLayout3"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/nav_view"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="0dp"
-        android:layout_marginEnd="0dp"
-        android:background="?android:attr/windowBackground"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:menu="@menu/bottom_nav_menu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

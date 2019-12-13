@@ -1,5 +1,7 @@
 package com.example.campusevents;
 
+import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -26,12 +28,25 @@ public class NearbyEventsAdapter extends RecyclerView.Adapter<NearbyEventsAdapte
     @NonNull
     @Override
     public NearbyEventsHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+        Context context = parent.getContext();
+        LayoutInflater layoutInflater = LayoutInflater.from(context);
+        View view = layoutInflater.inflate(R.layout.event_row, parent, false);
+        return new NearbyEventsHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull NearbyEventsHolder holder, int position) {
+        if(!events.isEmpty()) {
+            Events event = events.get(position);
 
+            TextView eventName = holder.eventName;
+            TextView time = holder.time;
+
+            eventName.setText(event.name);
+            time.setText("Time: " + event.time + "\nLocation: " + event.location);
+
+            holder.bind(event, listener);
+        }
     }
 
     @Override
@@ -42,9 +57,12 @@ public class NearbyEventsAdapter extends RecyclerView.Adapter<NearbyEventsAdapte
     public class NearbyEventsHolder extends RecyclerView.ViewHolder {
 
         TextView eventName;
+        TextView time;
 
         public NearbyEventsHolder(@NonNull View itemView) {
             super(itemView);
+            eventName = itemView.findViewById(R.id.rowName);
+            time = itemView.findViewById(R.id.rowTime);
         }
 
         public void bind(final Events event, final OnItemClickListener listener) {

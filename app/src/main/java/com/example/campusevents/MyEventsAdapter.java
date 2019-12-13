@@ -41,11 +41,9 @@ public class MyEventsAdapter extends RecyclerView.Adapter<MyEventsAdapter.MyEven
 
             TextView eventName = holder.eventName;
             TextView time = holder.time;
-            TextView date = holder.date;
 
             eventName.setText(event.name);
-            time.setText(event.time);
-            date.setText(event.date);
+            time.setText("Time: " + event.time + "\nLocation: " + event.location);
 
             holder.bind(event, listener);
         }
@@ -60,7 +58,6 @@ public class MyEventsAdapter extends RecyclerView.Adapter<MyEventsAdapter.MyEven
 
         TextView eventName;
         TextView time;
-        TextView date;
 
         public MyEventsHolder(@NonNull View itemView) {
             super(itemView);

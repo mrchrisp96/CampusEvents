@@ -16,8 +16,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.campusevents.ui.home.HomeFragment;
-import com.example.campusevents.ui.home.HomeViewModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -27,9 +25,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.database.annotations.NotNull;
-
-import org.w3c.dom.Text;
 
 import java.util.Objects;
 
@@ -67,7 +62,7 @@ public class login extends AppCompatActivity {
 
         authStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
-            public void onAuthStateChanged(@NotNull FirebaseAuth firebaseAuth) {
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 if(FirebaseAuth.getInstance().getCurrentUser() != null) {
 
                 }
@@ -85,7 +80,7 @@ public class login extends AppCompatActivity {
 
                     auth.signInWithEmailAndPassword(email.getText().toString().toLowerCase().replaceAll(" ", ""), password.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
-                        public void onComplete(@NotNull Task<AuthResult> task) {
+                        public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 if(Objects.requireNonNull(auth.getCurrentUser()).isEmailVerified()) {
                                     GlobalFirebase.user = auth.getCurrentUser();
@@ -130,7 +125,11 @@ public class login extends AppCompatActivity {
                         Student.currentStudent.name = data.child("Name").getValue().toString();
                         Student.currentStudent.college = data.child("College").getValue().toString();
                         Student.currentStudent.email = data.child("Email").getValue().toString();
-                        Intent intent = new Intent(login.this, MainActivity.class);
+
+                        email.setText("");
+                        password.setText("");
+
+                        Intent intent = new Intent(login.this, MainScreen.class);
                         startActivity(intent);
                         break;
                     }
