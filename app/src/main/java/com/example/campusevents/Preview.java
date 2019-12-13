@@ -44,7 +44,7 @@ public class Preview extends AppCompatActivity {
         if(extras != null) {
             phone = extras.getString("Phone");
             if(phone != null) {
-                phone = "(" + phone.substring(0, 3) + ")-" + phone.substring(2, 5) + "-" + phone.substring(6, 10);
+                phone = "(" + phone.substring(0, 3) + ")-" + phone.substring(3, 6) + "-" + phone.substring(6, 10);
             }
         }
 
@@ -95,7 +95,11 @@ public class Preview extends AppCompatActivity {
         publish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                reference = reference.child("College").child(Student.currentStudent.college).child("Clubs").child(NewEvent.newEvent.name);
+                if(NewEvent.newEvent.whichOne.equals("Club")) {
+                    reference = reference.child("College").child(Student.currentStudent.college).child("Clubs").child(NewEvent.newEvent.name);
+                } else {
+                    reference = reference.child("College").child(Student.currentStudent.college).child("Events").child(NewEvent.newEvent.name);
+                }
                 reference.child("Host").setValue(Student.currentStudent.name);
                 reference.child("Email").setValue(Student.currentStudent.email);
                 reference.child("Phone").setValue(phone);
@@ -103,8 +107,13 @@ public class Preview extends AppCompatActivity {
                 reference.child("Time").setValue(NewEvent.newEvent.time);
                 reference.child("Description").setValue(NewEvent.newEvent.description);
 
-                reference = database.getReference().child("Students").child(Student.currentStudent.username)
-                        .child("My Clubs").child(NewEvent.newEvent.name);
+                if(NewEvent.newEvent.whichOne.equals("Club")) {
+                    reference = database.getReference().child("Students").child(Student.currentStudent.username)
+                            .child("My Clubs").child(NewEvent.newEvent.name);
+                } else {
+                    reference = database.getReference().child("Students").child(Student.currentStudent.username)
+                            .child("My Events").child(NewEvent.newEvent.name);
+                }
 
                 reference.child("Host").setValue(Student.currentStudent.name);
                 reference.child("Email").setValue(Student.currentStudent.email);
@@ -112,6 +121,9 @@ public class Preview extends AppCompatActivity {
                 reference.child("Location").setValue(NewEvent.newEvent.location);
                 reference.child("Time").setValue(NewEvent.newEvent.time);
                 reference.child("Description").setValue(NewEvent.newEvent.description);
+
+                NewEvent.newEvent = new NewEvent();
+                // reset the NewEvent object
 
                 Intent intent = new Intent(Preview.this, MainScreen.class);
                 startActivityForResult(intent, TOAST_CODE);

@@ -62,6 +62,7 @@ public class MainScreen extends AppCompatActivity implements LocationListener, N
     RecyclerView.LayoutManager layoutManager;
     NearbyEventsAdapter adapter;
     ArrayList<Events> events;
+    ArrayList<String> attendingClubs;
 
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference reference = database.getReference();
@@ -236,6 +237,24 @@ public class MainScreen extends AppCompatActivity implements LocationListener, N
     }
 
     public void populateMyEvents() {
+        attendingClubs = new ArrayList<>();
+
+        reference = database.getReference().child("Students").child(Student.currentStudent.username).child("Attending Clubs");
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot data : dataSnapshot.getChildren()) {
+                    if(data != null) {
+                        attendingClubs.add(data.getKey());
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
         reference = database.getReference().child("Students").child(Student.currentStudent.username).child("My Clubs");
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -251,7 +270,9 @@ public class MainScreen extends AppCompatActivity implements LocationListener, N
                     event.location = data.child("Location").getValue().toString();
                     event.time = data.child("Time").getValue().toString();
                     event.description = data.child("Description").getValue().toString();
-
+                    if (attendingClubs.contains(event.name)) {
+                        Student.currentStudent.memberClub.add(event);
+                    }
                     Student.currentStudent.myEvents.add(event);
                 }
             }

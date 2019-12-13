@@ -125,9 +125,9 @@ public class CreateEvent2 extends AppCompatActivity {
         description.setVerticalScrollBarEnabled(true);
         description.setMovementMethod(new ScrollingMovementMethod());
 
-        tags.setScroller(new Scroller(getApplicationContext()));
-        tags.setVerticalScrollBarEnabled(true);
-        tags.setMovementMethod(new ScrollingMovementMethod());
+//        tags.setScroller(new Scroller(getApplicationContext()));
+//        tags.setVerticalScrollBarEnabled(true);
+//        tags.setMovementMethod(new ScrollingMovementMethod());
 
 //    } else if (newEvent.tags.isEmpty()) {
 //        final AlertDialog.Builder warningMsg = new AlertDialog.Builder(CreateEvent.this);

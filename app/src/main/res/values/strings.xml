@@ -25,5 +25,5 @@
     <string name="menu_account">Account</string>
     <string name="menu_allclubs">All Clubs</string>
     <string name="menu_myclubs">My Clubs</string>
-    <string name="menu_newclub"> New Club</string>
+    <string name="menu_newclub">Create a Club</string>
 </resources>

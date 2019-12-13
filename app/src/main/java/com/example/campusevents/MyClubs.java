@@ -39,8 +39,8 @@ public class MyClubs extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_clubs);
 
-        events = Student.currentStudent.myEvents;
-        populateMyEvents();
+        events = Student.currentStudent.memberClub;
+       // populateMyEvents();
 
         myEvents = (RecyclerView) findViewById(R.id.myEvents);
 
@@ -75,7 +75,8 @@ public class MyClubs extends AppCompatActivity {
         addEvent.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20f);
 
         title = (TextView) findViewById(R.id.text_myclubs);
-        title.setText("Clubs I Made");
+        title.setText("Clubs I Joined");
+        myEventsAdapter.notifyDataSetChanged();
     }
 
     public void populateMyEvents() {
@@ -100,6 +101,7 @@ public class MyClubs extends AppCompatActivity {
                             events.add(event);
                         }
                     }
+                    myEventsAdapter.notifyDataSetChanged();
                 }
             }
 
@@ -108,5 +110,11 @@ public class MyClubs extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        myEventsAdapter.notifyDataSetChanged();
     }
 }

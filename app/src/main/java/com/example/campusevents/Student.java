@@ -8,7 +8,7 @@ public class Student {
 
     public String username, name, college, email, uid;
     public ArrayList<Events> myEvents = new ArrayList<>(); // stores the events by the students
-    public ArrayList<String> interests = new ArrayList<>(); // lists of interests by student
+    public ArrayList<Events> memberClub = new ArrayList<>(); // lists of interests by student
 
     public static Student currentStudent = new Student();
 
@@ -18,7 +18,7 @@ public class Student {
         this.email = email;
         this.college = college;
         this.myEvents = myEvents;
-        this.interests = interests;
+        this.memberClub = memberClub;
         this.uid = uid;
     }
 }

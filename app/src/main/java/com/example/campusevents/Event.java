@@ -40,7 +40,7 @@ public class Event extends AppCompatActivity {
     TextView mainDesc, title;
     Button join, attendees;
     Events tempEvent;
-    boolean signedUp = false; // if the student is already signed up
+    boolean signedUp = false, myClub = false; // if the student is already signed up
 
     static final int REQUEST_CODE = 2;
 
@@ -64,94 +64,133 @@ public class Event extends AppCompatActivity {
         title.setText(name);
         join = (Button) findViewById(R.id.button8);
 
-        database.getReference().child("Students").child(Student.currentStudent.username).child("Attending Clubs")
+        database.getReference().child("Students").child(Student.currentStudent.username).child("My Clubs")
                 .addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for(DataSnapshot data: dataSnapshot.getChildren()) {
-                    if(data.getKey() != null && data.getKey().equals(name)) {
-                        signedUp = true;
-                        join.setText("Leave Club");
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        for(DataSnapshot data: dataSnapshot.getChildren()) {
+                            if(data.getKey() != null && data.getKey().equals(name)) {
+                                join.setText("Edit Club");
+                                myClub = true;
+                            }
+                        }
                     }
-                }
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            }
-        });
+                    }
+                });
+
+        if(!myClub) {
+            database.getReference().child("Students").child(Student.currentStudent.username).child("Attending Clubs")
+                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            for (DataSnapshot data : dataSnapshot.getChildren()) {
+                                if (data.getKey() != null && data.getKey().equals(name)) {
+                                    signedUp = true;
+                                    join.setText("Leave Club");
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+        }
 
         // only if the student didn't sign up for it
         join.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!signedUp) {
-                    // if student didn't sign up for this club yet
-                    AlertDialog.Builder dialog = new AlertDialog.Builder(Event.this);
-                    dialog.setMessage("")
-                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    reference = database.getReference().child("College").child(Student.currentStudent.college).child("Clubs").child(name)
-                                            .child("Members").child(Student.currentStudent.uid);
-                                    reference.child("Name").setValue(Student.currentStudent.name);
-                                    reference.child("Email").setValue(Student.currentStudent.email);
-
-                                    reference = database.getReference().child("Students").child(Student.currentStudent.username).child("Attending Clubs").child(name);
-                                    reference.child(name).setValue(name);
-                                    signedUp = true;
-                                    join.setText("Leave Club");
-
-                                    Events events = new Events();
-                                    events.name = name;
-                                    Student.currentStudent.myEvents.add(events);
-                                }
-                            })
-                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.cancel();
-                                }
-                            });
-                    AlertDialog alertDialog = dialog.create();
-                    alertDialog.setTitle("Would you like to join " + name + "?");
-                    alertDialog.show();
+                if(myClub) {
+                    // if the students owns the club and wishes to edit it
+                    Intent intent = new Intent(Event.this, EditEvents.class);
+                    intent.putExtra("Name", name);
+                    intent.putExtra("Host", host);
+                    intent.putExtra("Email", email);
+                    intent.putExtra("Phone", phone);
+                    intent.putExtra("Location", location);
+                    intent.putExtra("Time", time);
+                    intent.putExtra("Description", description);
+                    startActivity(intent);
                 } else {
-                    // if the student intends on leaving the club
-                    AlertDialog.Builder dialog = new AlertDialog.Builder(Event.this);
-                    dialog.setMessage("You can always rejoin again")
-                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    reference = database.getReference().child("College").child(Student.currentStudent.college)
-                                            .child("Clubs").child(name).child("Members");
-                                    reference.child(Student.currentStudent.uid).removeValue();
+                    if (!signedUp) {
+                        // if student didn't sign up for this club yet
+                        AlertDialog.Builder dialog = new AlertDialog.Builder(Event.this);
+                        dialog.setMessage("")
+                                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        reference = database.getReference().child("College").child(Student.currentStudent.college).child("Clubs").child(name)
+                                                .child("Members").child(Student.currentStudent.uid);
+                                        reference.child("Name").setValue(Student.currentStudent.name);
+                                        reference.child("Email").setValue(Student.currentStudent.email);
 
-                                    reference = database.getReference().child("Students").child(Student.currentStudent.username).child("Attending Clubs").child(name);
-                                    reference.child(name).removeValue();
-                                    // change color of button
-                                    signedUp = false;
-                                    join.setText("Join Club");
-                                    int counter = 0;
-                                    for(Events event: Student.currentStudent.myEvents) {
-                                        if(event.name.equals(name)) {
-                                            Student.currentStudent.myEvents.remove(counter);
-                                            break;
-                                        }
-                                        counter++;
+                                        reference = database.getReference().child("Students").child(Student.currentStudent.username).child("Attending Clubs").child(name);
+                                        reference.setValue(name);
+                                        signedUp = true;
+                                        join.setText("Leave Club");
+
+                                        Events events = new Events();
+                                        events.name = name;
+                                        events.time = time;
+                                        events.host = host;
+                                        events.location = location;
+                                        events.description = description;
+                                        events.phone = phone;
+                                        events.email = email;
+                                        Student.currentStudent.memberClub.add(events);
                                     }
-                                }
-                            })
-                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.cancel();
-                                }
-                            });
-                    AlertDialog alertDialog = dialog.create();
-                    alertDialog.setTitle("Are you sure you want to leave " + name + "?");
-                    alertDialog.show();
+                                })
+                                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.cancel();
+                                    }
+                                });
+                        AlertDialog alertDialog = dialog.create();
+                        alertDialog.setTitle("Would you like to join " + name + "?");
+                        alertDialog.show();
+                    } else {
+                        // if the student intends on leaving the club
+                        AlertDialog.Builder dialog = new AlertDialog.Builder(Event.this);
+                        dialog.setMessage("You can always rejoin again")
+                                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        reference = database.getReference().child("College").child(Student.currentStudent.college)
+                                                .child("Clubs").child(name).child("Members");
+                                        reference.child(Student.currentStudent.uid).removeValue();
+
+                                        reference = database.getReference().child("Students").child(Student.currentStudent.username).child("Attending Clubs").child(name);
+                                        reference.removeValue();
+                                        // change color of button
+                                        signedUp = false;
+                                        join.setText("Join Club");
+                                        int counter = 0;
+                                        for (Events event : Student.currentStudent.memberClub) {
+                                            if (event.name.equals(name)) {
+                                                Student.currentStudent.memberClub.remove(counter);
+                                                break;
+                                            }
+                                            counter++;
+                                        }
+                                    }
+                                })
+                                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.cancel();
+                                    }
+                                });
+                        AlertDialog alertDialog = dialog.create();
+                        alertDialog.setTitle("Are you sure you want to leave " + name + "?");
+                        alertDialog.show();
+                    }
                 }
             }
         });
